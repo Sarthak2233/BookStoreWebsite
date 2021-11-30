@@ -7,6 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bookstore.dao.CustomerDAO;
 import com.bookstore.dao.HashGenerator;
@@ -224,8 +225,17 @@ public class CustomerServices {
 			request.setAttribute("message", message);
 			showlogin();
 		}else {
+			HttpSession session=request.getSession();
 			request.getSession().setAttribute("loggedCustomer", customer);
+			Object objRequestedURL=session.getAttribute("redirectURL");
+			if(objRequestedURL!=null) {
+				String requestedURL=(String) objRequestedURL;
+				session.removeAttribute(requestedURL);
+				response.sendRedirect(requestedURL);
+			}
+			else {
 			showCustomerProfile();
+			}
 		}
 		
 	}

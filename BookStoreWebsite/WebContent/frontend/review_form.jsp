@@ -6,61 +6,82 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Write Review</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+	<link rel="stylesheet" href="jquery.rateyo.css"/>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+	
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
 	<div align="center">
-	<h1>
-	@erots <br><br> BOOKCOUNTER 
-	</h1>
-	<h1> Write Review </h1>
-		<c:if test="${message!=null }">
-		<div align="center">
-			<h4><i>${message}</i></h4>
-		</div>
-		</c:if>
-		<form id="" action="" method="post" >
-			<table class="form">
+		<form id="reviewForm" action="submit_review" method="post">
+			<table class="normal" style="border:none; " width=80% >
 			<tr>
-		 		<td align="right">Email</td>
-		 		<td align="left"><input type="text" id="email" name="email" size="20" value=""/></td>
-		 	</tr>
-		 	<tr> <td>&nbsp;</td></tr>
-		 	<tr>
-		 		<td align="right">Password</td>
-		 		<td align="left"><input type="password" id="password" name="password" size="20" value=""/>
-		 	</tr>
-		 	<tr> <td>&nbsp;</td></tr>
-		 	<tr>
-		 		<td colspan="2" align="center">
-		 		<button type="submit" >Login</button>&nbsp;&nbsp;&nbsp;&nbsp;
-		 	</tr>
-			</table>	
-		</form>	
+				<td><h1>Your reviews</h1></td>
+				
+				<td align="right">
+				<h1><b>${loggedCustomer.fullname}</b></h1>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3"><hr/></td>
+			</tr>
+			<tr>
+				<td>
+				<img src="data:image/jpg;base64,${ book.base64Image}" width="300"  height="350"/><br>
+				<b>by ${book.author}</b>
+				</td>
+				<td>
+					<div id="rateYo"></div>
+					<input type="hidden" id="rating" name="rating"/>
+					<input type="hidden"  name="bookId" value="${book.bookId}"/>
+					<br/>
+					<input type="text" name="headline" size="60"  placeholder="Headline for review required.">
+					<br><br/>
+					<textarea name="comment" rows="10" cols="60" placeholder="Write your review details here.."></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="3"valign="middle">
+					<button type="submit">Submit</button>
+					&nbsp;&nbsp;
+					<button id="Cancel">Cancel</button>
+				</td>
+			</tr>
+			</table>
+		</form>
 	</div>
+	
 	<jsp:directive.include file="footer.jsp" />
 </body>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#formlogin").validate({
+	$("#reviewForm").validate({
 		rules:{
-			email:{
-				required:true,
-				email:true
-			},
-			password:"required",
+			headline:"required",
+			comment:"required"
 		},
 		messages:{
-			email:{
-				required:"Enter email address.",
-				email:"VALID EMAIL REQUIRED",
-			},
-			password:"Password required. Please enter it.",
+			headline:"Please enter headline.",
+			comment:"Please enter review details.."
 		}
 	});	
+	
+	$("#Cancel").click(function(){
+		history.go(-1);
+	});
+	 
+	$("#rateYo").rateYo({
+		    starWidth: "40px",
+		    fullStar: true,
+		    onSet: function(rating,rateYoInstance){
+		    	$("#rating").val(rating);
+		    }
+		  });
 });
 </script>
 </html>
