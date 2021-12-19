@@ -21,7 +21,6 @@
 			<table class="normal" style="border:none; " width=80% >
 			<tr>
 				<td><h1>Your reviews</h1></td>
-				
 				<td align="right">
 				<h1><b>${loggedCustomer.fullname}</b></h1>
 				</td>
@@ -30,9 +29,12 @@
 				<td colspan="3"><hr/></td>
 			</tr>
 			<tr>
+				<td align="left"><i>${book.title}</i></td>
+			</tr>
+			<tr>
 				<td>
 				<img src="data:image/jpg;base64,${ book.base64Image}" width="300"  height="350"/><br>
-				<b>by ${book.author}</b>
+				<b>by ${book.author}</b><br>
 				</td>
 				<td>
 					<div id="rateYo"></div>

@@ -55,7 +55,7 @@ public class ReviewDAO extends JpaDAO<Review> implements GenericDAO<Review> {
 		}
 	
 	public Review findByCustomerAndBook(Integer customerId, Integer bookId) {
-		Map<String,Object> parameter=new HashMap();
+		Map<String,Object> parameter=new HashMap<String, Object>();
 		parameter.put("customerId",customerId);
 		parameter.put("bookId", bookId);
 		List<Review> result=super.findWithNamedQuery("Review.findByCustomerANDBook",parameter);

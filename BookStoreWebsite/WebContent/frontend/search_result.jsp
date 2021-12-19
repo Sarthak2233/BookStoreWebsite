@@ -51,7 +51,7 @@
 						</div>
 						<div style="display:inline-block; margin:20px; vertical-align:top;" ">
 							<h5>Rs${book.price}</h5>
-							<button type="submit">ADD To Cart</button>
+							  <a href="add_to_cart?book_id=${book.bookId }"><button>ADD To Cart</button></a>
 						</div>
 					</div>
 				</c:forEach>

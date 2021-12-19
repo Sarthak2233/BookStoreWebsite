@@ -32,7 +32,7 @@
 						${book.description}<br>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<br>
-						<button type="submit">ADD To Cart</button>
+						<button id="buttonAddtoCart">ADD To Cart</button>
 						<br>
 						<br>
 					<div>
@@ -99,6 +99,9 @@
 		$(document).ready(function(){
 			$("#ButtonWriteReview").click(function(){
 				window.location='write_review?book_id='+${book.bookId};
+			});
+			$("#buttonAddtoCart").click(function(){
+				window.location='add_to_cart?book_id='+${book.bookId};
 			});
 		});
 		</script>
